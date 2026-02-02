@@ -1,0 +1,221 @@
+{
+  "main": {
+    "id": "e25cb695cbe0ce21",
+    "type": "split",
+    "children": [
+      {
+        "id": "b2ae64850fb5fa56",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "56288e453e285816",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Граф"
+            }
+          },
+          {
+            "id": "cefe239ea75d988b",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.9.12"
+              },
+              "icon": "lucide-book-up",
+              "title": "примечания к выпуску 1.9.12"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "af18ff6ffc4b6175",
+    "type": "split",
+    "children": [
+      {
+        "id": "ffc1b12bb9de08e5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "343cd6b32451b7e4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловый менеджер"
+            }
+          },
+          {
+            "id": "d4d71bce9c096d3b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Поиск"
+            }
+          },
+          {
+            "id": "002327311f82cf1d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Закладки"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "4a377f3b0fae03b9",
+    "type": "split",
+    "children": [
+      {
+        "id": "4ac2810e3666186d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5f05419ed7c9b71b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Music/Assets and instuments.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Обратные ссылки для Assets and instuments"
+            }
+          },
+          {
+            "id": "fba0c403c5f591a7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Magic Awakening/Legend 1/Вступление.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Исходящие ссылки из Вступление"
+            }
+          },
+          {
+            "id": "823a71c015de62af",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Теги"
+            }
+          },
+          {
+            "id": "dbd3310772708bc7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Magic Awakening/Legend 1/Вступление.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Структура Вступление"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:Создать новую базу": false,
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false
+    }
+  },
+  "active": "cefe239ea75d988b",
+  "lastOpenFiles": [
+    "Magic Awakening/Мир/Система Арон.canvas",
+    "Magic Awakening/Мир/Порталы.md",
+    "Magic Awakening/Мир/Планеты/Альфа.md",
+    "Magic Awakening/Мир/Планеты/Голубая планета.md",
+    "Music/Assets and instuments.md",
+    "Снежинка 1.md",
+    "Magic Awakening/Legend 1/Этапы.md",
+    "Magic Awakening/Legend 1/Вступление.md",
+    "Magic Awakening/Путь Героя/Основной путь.md",
+    "Magic Awakening/Легенды/Легенда о Люцепее.md",
+    "Magic Awakening/Legend 1/Замок/Имена Монахов.md",
+    "Magic Awakening/Legend 1/Окружение замка/Имена NPC.md",
+    "Magic Awakening/Введение..md",
+    "Magic Awakening/Мир/Планеты/Солнце.md",
+    "Magic Awakening/Мир/Арон.md",
+    "Music",
+    "Magic Awakening/Legend 1/Окружение замка",
+    "Magic Awakening/Legend 1/Замок",
+    "Magic Awakening/Legend 1",
+    "Magic Awakening/События/Синий дождь.md",
+    "Magic Awakening/Мир/Что.canvas",
+    "Magic Awakening/Мир/Планеты/Что.canvas",
+    "Magic Awakening/Мир/Болезни/Магический рак.md",
+    "Magic Awakening/Мир/Болезни/Untitled.md",
+    "Magic Awakening/Мир/Болезни",
+    "Magic Awakening/Мир/Untitled",
+    "Magic Awakening/Мир/Система Арон.md",
+    "Magic Awakening/Мир/Untitled.md",
+    "Magic Awakening/Мир/Планеты/Реводост.md",
+    "Magic Awakening/Мир/Планеты/Untitled.md",
+    "Magic Awakening/Мир/Планеты/Тиктон.md",
+    "Magic Awakening/Персонажи",
+    "Magic Awakening/События",
+    "Magic Awakening/Мир/Планеты",
+    "Magic Awakening/Мир",
+    "Magic Awakening/Intro.md",
+    "Magic Awakening.md"
+  ]
+}
