@@ -1,0 +1,332 @@
+{
+  "dialogue_id": "dlg_elara_complete_demo",
+  "version": "1.0",
+  "meta": {
+    "title": "Полная демонстрация диалоговой системы",
+    "location": "ark_market",
+    "time_of_day": "morning",
+    "participants": ["player", "elara"]
+  },
+  "entry_point": "node_greeting",
+  "nodes": {
+    "node_greeting": {
+      "speaker": "elara",
+      "text": "Приветствую, путник. Я вижу по твоим глазам — ты не из этих мест. Что привело тебя в Арк Созидания?",
+      "meta_human": {
+        "facial_expression": "curious",
+        "gesture": "gesture_greeting_open",
+        "look_at": "player",
+        "voice_line": "vo_elara_greeting_01",
+        "camera_shot": "medium_shot",
+        "blend_shapes": {
+          "brow_raise": 0.4,
+          "head_tilt": 0.3
+        }
+      },
+      "options": [
+        {
+          "text": "Я ищу ответы о своём происхождении. Говорят, здесь хранятся древние знания.",
+          "next_node": "node_origin_truth",
+          "effects": ["set_flag:elara_seeks_knowledge", "change_disposition:elara:+5"]
+        },
+        {
+          "text": "Это не твоё дело. Просто ответь на мои вопросы.",
+          "next_node": "node_rude_response",
+          "effects": ["change_disposition:elara:-15", "set_flag:elara_dislikes_player"]
+        },
+        {
+          "text": "[Требуется: Руна Восприятия] Ты скрываешь что-то. Я вижу тревогу в твоих глазах.",
+          "next_node": "node_perception_reveal",
+          "condition": "has_rune:perception",
+          "effects": ["unlock_knowledge:elara_secret", "change_disposition:elara:+10"]
+        },
+        {
+          "text": "[Если флаг 'met_elara' установлен] Рада снова тебя видеть, Элара.",
+          "next_node": "node_reunion",
+          "condition": "has_flag:met_elara"
+        }
+      ]
+    },
+
+    "node_origin_truth": {
+      "speaker": "elara",
+      "text": "*мягко улыбается* Ответы... Все мы их ищем. Но знания в Арке имеют цену. Иногда слишком высокую.",
+      "meta_human": {
+        "facial_expression": "warm",
+        "gesture": "gesture_contemplate",
+        "look_at": "player",
+        "voice_line": "vo_elara_reflective_01",
+        "camera_shot": "close_up",
+        "blend_shapes": {
+          "smile": 0.5,
+          "brow_furrow": 0.2
+        }
+      },
+      "options": [
+        {
+          "text": "Какую цену? Я готов заплатить.",
+          "next_node": "node_price_discussion"
+        },
+        {
+          "text": "Ты предупреждаешь или угрожаешь?",
+          "next_node": "node_defensive",
+          "effects": ["change_disposition:elara:-5"]
+        }
+      ]
+    },
+
+    "node_rude_response": {
+      "speaker": "elara",
+      "text": "*холодно* Как скажешь, чужак. Но помни — в Арке никто не обязан тебе ничего. *отворачивается*",
+      "meta_human": {
+        "facial_expression": "cold",
+        "gesture": "gesture_dismiss",
+        "look_at": null,
+        "voice_line": "vo_elara_cold_01",
+        "camera_shot": "profile",
+        "blend_shapes": {
+          "jaw_clench": 0.6,
+          "eye_squint": 0.4
+        }
+      },
+      "options": [
+        {
+          "text": "Подожди! Я... я извиняюсь. Просто я в отчаянии.",
+          "next_node": "node_apology_accept",
+          "effects": ["change_disposition:elara:+5"]
+        },
+        {
+          "text": "[Уйти]",
+          "next_node": "END_DIALOGUE",
+          "effects": ["set_flag:elara_ignored"]
+        }
+      ]
+    },
+
+    "node_perception_reveal": {
+      "speaker": "elara",
+      "text": "*вздрогнув* Ты... ты видишь слишком много. *тихо* Приходи ночью, когда рынок пуст. Не здесь. Не сейчас.",
+      "meta_human": {
+        "facial_expression": "shocked",
+        "gesture": "gesture_shield_face",
+        "look_at": "player",
+        "voice_line": "vo_elara_whisper_01",
+        "camera_shot": "close_up",
+        "blend_shapes": {
+          "eye_wide": 0.8,
+          "brow_raise": 0.7,
+          "lip_tight": 0.5
+        }
+      },
+      "options": [
+        {
+          "text": "Чего ты боишься?",
+          "next_node": "node_fear_reveal"
+        },
+        {
+          "text": "Хорошо. Где встретимся?",
+          "next_node": "node_meeting_arrange",
+          "effects": ["unlock_quest:elara_secret_meeting", "set_flag:elara_trusts_player"]
+        }
+      ]
+    },
+
+    "node_price_discussion": {
+      "speaker": "elara",
+      "text": "Цена... *пауза* Некоторые знания меняют тебя навсегда. Ты готов рискнуть своей человечностью?",
+      "meta_human": {
+        "facial_expression": "intrigued",
+        "gesture": "gesture_weigh_options",
+        "look_at": "player",
+        "voice_line": "vo_elara_serious_01",
+        "camera_shot": "two_shot"
+      },
+      "timeout": {
+        "duration": 8.0,
+        "default_option": 0,
+        "on_timeout_animation": "impatient"
+      },
+      "options": [
+        {
+          "text": "Я готов на всё, чтобы узнать правду.",
+          "next_node": "node_serious_commit",
+          "effects": ["change_stat:wisdom:+1", "change_stat:humanity:-5"]
+        },
+        {
+          "text": "Что ты имеешь в виду под 'человечностью'?",
+          "next_node": "node_clarification"
+        },
+        {
+          "text": "[Таймаут] *замолчать*",
+          "next_node": "node_silence",
+          "hidden": true
+        }
+      ]
+    },
+
+    "node_serious_commit": {
+      "speaker": "elara",
+      "text": "*серьёзно* Тогда слушай внимательно. В Глубинах Арка есть Зеркало Истин. Но охраняет его... нечто древнее.",
+      "meta_human": {
+        "facial_expression": "serious",
+        "gesture": "gesture_lean_in",
+        "look_at": "player",
+        "voice_line": "vo_elara_urgent_01",
+        "camera_shot": "close_up"
+      },
+      "auto_advance": true,
+      "next_node": "node_quest_offer"
+    },
+
+    "node_quest_offer": {
+      "speaker": "elara",
+      "text": "Если ты действительно хочешь узнать правду — найди меня после заката. У Старого Колодца. И приготовь руну защиты.",
+      "meta_human": {
+        "facial_expression": "neutral",
+        "gesture": "gesture_farewell",
+        "look_at": "player",
+        "voice_line": "vo_elara_quest_01"
+      },
+      "options": [
+        {
+          "text": "Я буду там.",
+          "next_node": "END_DIALOGUE",
+          "effects": ["start_quest:mirror_of_truth", "set_flag:elara_meeting_scheduled"]
+        }
+      ]
+    },
+
+    "node_reunion": {
+      "speaker": "elara",
+      "text": "*радостно* Ты вернулся! Я надеялась... то есть, я рада, что ты в порядке.",
+      "meta_human": {
+        "facial_expression": "happy",
+        "gesture": "gesture_welcome",
+        "look_at": "player",
+        "voice_line": "vo_elara_happy_01",
+        "blend_shapes": {
+          "smile": 0.8,
+          "blush": 0.3
+        }
+      },
+      "options": [
+        {
+          "text": "У меня есть новости о том, что ты просила узнать.",
+          "next_node": "node_quest_progress"
+        },
+        {
+          "text": "Просто хотел поблагодарить за совет.",
+          "next_node": "END_DIALOGUE",
+          "effects": ["change_disposition:elara:+10"]
+        }
+      ]
+    },
+
+    "node_apology_accept": {
+      "speaker": "elara",
+      "text": "*оборачивается* Отчаяние... Да, оно знакомо мне. *мягче* Хорошо. Я выслушаю тебя.",
+      "meta_human": {
+        "facial_expression": "sympathetic",
+        "gesture": "gesture_invite",
+        "look_at": "player",
+        "voice_line": "vo_elara_soften_01",
+        "camera_shot": "medium_shot"
+      },
+      "next_node": "node_origin_truth"
+    },
+
+    "node_defensive": {
+      "speaker": "elara",
+      "text": "*вздыхает* Ни то, ни другое. Просто констатирую факты. Продолжать разговор?",
+      "meta_human": {
+        "facial_expression": "tired",
+        "gesture": "gesture_shrug",
+        "voice_line": "vo_elara_tired_01"
+      },
+      "options": [
+        {
+          "text": "Да, прошу прощения за резкость.",
+          "next_node": "node_origin_truth"
+        },
+        {
+          "text": "Нет, я найду ответы сам.",
+          "next_node": "END_DIALOGUE",
+          "effects": ["set_flag:refused_elara_help"]
+        }
+      ]
+    },
+
+    "node_fear_reveal": {
+      "speaker": "elara",
+      "text": "*шёпотом* Кулькт. Они всюду. У них есть... глаза в стенах.",
+      "meta_human": {
+        "facial_expression": "fearful",
+        "gesture": "gesture_nervous_glance",
+        "look_at": "camera_left",
+        "voice_line": "vo_elara_fear_01",
+        "blend_shapes": {
+          "eye_wide": 0.9,
+          "brow_raise": 0.6
+        }
+      },
+      "next_node": "node_meeting_arrange"
+    },
+
+    "node_meeting_arrange": {
+      "speaker": "elara",
+      "text": "У Старого Колодца, после заката. Приходи один.",
+      "meta_human": {
+        "facial_expression": "neutral",
+        "gesture": "gesture_farewell_quick",
+        "look_at": null
+      },
+      "next_node": "END_DIALOGUE"
+    },
+
+    "node_clarification": {
+      "speaker": "elara",
+      "text": "Я имею в виду, что знание нельзя отнять. Оно останется с тобой, даже когда станет бременем.",
+      "meta_human": {
+        "facial_expression": "sad",
+        "gesture": "gesture_hand_on_heart"
+      },
+      "next_node": "node_price_discussion"
+    },
+
+    "node_silence": {
+      "speaker": "elara",
+      "text": "*недовольно* Не люблю, когда меня заставляют ждать. Ты ещё не готов к ответам.",
+      "meta_human": {
+        "facial_expression": "disappointed",
+        "gesture": "gesture_turn_away"
+      },
+      "next_node": "END_DIALOGUE",
+      "effects": ["change_disposition:elara:-5", "set_flag:elara_impatient"]
+    },
+
+    "node_quest_progress": {
+      "speaker": "elara",
+      "text": "*зажигается интересом* Говори! Что ты узнал?",
+      "meta_human": {
+        "facial_expression": "intrigued",
+        "gesture": "gesture_lean_in",
+        "camera_shot": "close_up"
+      },
+      "next_node": "END_DIALOGUE"
+    }
+  },
+
+  "variables": {
+    "local": {
+      "elara_patience": 50,
+      "conversation_tone": "neutral"
+    },
+    "global_refs": [
+      "player_reputation",
+      "main_quest_stage",
+      "has_rune_perception",
+      "met_elara",
+      "elara_disposition"
+    ]
+  }
+}

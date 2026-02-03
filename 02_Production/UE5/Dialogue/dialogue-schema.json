@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://magicawakening.game/dialogue-schema.json",
+  "title": "Magic Awakening Dialogue Schema",
+  "description": "Schema for dialogue files in Magic Awakening UE5 project",
+  "type": "object",
+  "required": ["dialogue_id", "version", "entry_point", "nodes"],
+  "properties": {
+    "dialogue_id": {
+      "type": "string",
+      "pattern": "^dlg_[a-z_]+$",
+      "description": "Unique identifier for dialogue (e.g., dlg_elara_intro)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Semantic version (e.g., 1.0)"
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "location": { "type": "string" },
+        "time_of_day": { 
+          "type": "string",
+          "enum": ["morning", "day", "evening", "night", "any"]
+        },
+        "participants": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "entry_point": {
+      "type": "string",
+      "description": "ID of starting node"
+    },
+    "nodes": {
+      "type": "object",
+      "patternProperties": {
+        "^node_[a-z0-9_]+$": {
+          "type": "object",
+          "required": ["speaker", "text"],
+          "properties": {
+            "speaker": {
+              "type": "string",
+              "description": "Character ID"
+            },
+            "text": {
+              "type": "string",
+              "description": "Dialogue text (can use localization keys)"
+            },
+            "meta_human": {
+              "type": "object",
+              "properties": {
+                "facial_expression": {
+                  "type": "string",
+                  "enum": [
+                    "neutral", "happy", "sad", "angry", "surprised",
+                    "disgusted", "fearful", "curious", "intrigued",
+                    "cold", "warm", "suspicious", "shocked"
+                  ]
+                },
+                "gesture": {
+                  "type": "string",
+                  "description": "Animation montage ID"
+                },
+                "look_at": {
+                  "type": "string",
+                  "description": "Target to look at (player, npc_id, etc.)"
+                },
+                "voice_line": {
+                  "type": "string",
+                  "description": "Audio cue name"
+                },
+                "camera_shot": {
+                  "type": "string",
+                  "enum": [
+                    "close_up", "medium_shot", "wide_shot",
+                    "over_shoulder", "two_shot", "profile"
+                  ]
+                },
+                "blend_shapes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              }
+            },
+            "options": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["text", "next_node"],
+                "properties": {
+                  "text": { "type": "string" },
+                  "next_node": { 
+                    "type": "string",
+                    "description": "Node ID or 'END_DIALOGUE'"
+                  },
+                  "condition": {
+                    "type": ["string", "null"],
+                    "description": "Condition string (e.g., 'has_flag:met_elara')"
+                  },
+                  "effects": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "List of effects (e.g., 'set_flag', 'change_disposition')"
+                  },
+                  "hidden": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If true, option is not shown (used for default)"
+                  }
+                }
+              }
+            },
+            "timeout": {
+              "type": "object",
+              "properties": {
+                "duration": { "type": "number", "minimum": 0 },
+                "default_option": { "type": "integer", "minimum": 0 },
+                "on_timeout_animation": { "type": "string" }
+              }
+            },
+            "auto_advance": {
+              "type": "boolean",
+              "default": false,
+              "description": "Auto-advance to next_node after voice line ends"
+            },
+            "next_node": {
+              "type": ["string", "null"],
+              "description": "Default next node if no options"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "variables": {
+      "type": "object",
+      "properties": {
+        "local": {
+          "type": "object",
+          "description": "Variables local to this dialogue"
+        },
+        "global_refs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Global variable names used in this dialogue"
+        }
+      }
+    }
+  }
+}
